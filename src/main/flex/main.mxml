@@ -30,10 +30,10 @@
 
             private function customSettings():XML {
                 return <channel-definition>
-		            <properties>
-		                <record-message-times>true</record-message-times>
-		                <record-message-sizes>true</record-message-sizes>
-		            </properties>
+                    <properties>
+                        <record-message-times>true</record-message-times>
+                        <record-message-sizes>true</record-message-sizes>
+                    </properties>
                 </channel-definition>;
             }
 
