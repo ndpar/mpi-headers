@@ -1,0 +1,24 @@
+<service id="data-service" class="flex.data.DataService">
+    <adapters>
+        <adapter-definition id="actionscript" class="flex.data.adapters.ASObjectAdapter" />
+        <adapter-definition id="java" class="flex.data.adapters.JavaAdapter" default="true" />
+    </adapters>
+
+    <destination id="MyDestination">
+        <adapter ref="java" />
+        <properties>
+            <source>examples.ObjectAssembler</source>
+            <scope>application</scope>
+            <item-class>examples.DomainObject</item-class>
+            <use-transactions>false</use-transactions>
+            <auto-sync-enabled>true</auto-sync-enabled>
+            <cache-items>true</cache-items>
+            <metadata>
+                <identity property="id" type="java.lang.Integer" />
+            </metadata>
+            <network>
+                <session-timeout>20</session-timeout>
+            </network>
+        </properties>
+    </destination>
+</service>

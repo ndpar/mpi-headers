@@ -1,0 +1,26 @@
+<services-config>
+    <services>
+        <service-include file-path="data-management-config.xml" />
+        <default-channels>
+            <channel ref="my-rtmp" />
+        </default-channels>
+    </services>
+
+    <channels>
+        <channel-definition id="my-rtmp" class="mx.messaging.channels.RTMPChannel">
+            <endpoint url="rtmp://{server.name}:2038" class="flex.messaging.endpoints.RTMPEndpoint" />
+            <properties>
+                <record-message-times>true</record-message-times>
+                <record-message-sizes>true</record-message-sizes>
+            </properties>
+        </channel-definition>
+    </channels>
+
+    <logging>
+        <target class="flex.messaging.log.ConsoleTarget" level="NONE">
+            <properties>
+                <categoryPrefix>lcds</categoryPrefix>
+            </properties>
+        </target>
+    </logging>
+</services-config>

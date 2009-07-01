@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" creationComplete="init()">
+    <mx:Script>
+        <![CDATA[
+            import mx.messaging.Channel;
+            import mx.messaging.ChannelSet;
+            import mx.messaging.channels.RTMPChannel;
+            import mx.messaging.events.MessageEvent;
+            import mx.messaging.messages.MessagePerformanceUtils;
+
+            private function init():void {
+                ds.channelSet = createChannelSet();
+            }
+
+            private function createChannelSet():ChannelSet {
+                var channels:Array = new Array();
+                channels.push(createRtmpChannel());
+
+                var result:ChannelSet = new ChannelSet();
+                result.channels = channels;
+                return result;
+            }
+
+            private function createRtmpChannel():Channel {
+                var result:Channel = new RTMPChannel();
+                result.url = "rtmp://localhost:2038";
+                result.applySettings(customSettings());
+                return result;
+            }
+
+            private function customSettings():XML {
+                return <channel-definition>
+		            <properties>
+		                <record-message-times>true</record-message-times>
+		                <record-message-sizes>true</record-message-sizes>
+		            </properties>
+                </channel-definition>;
+            }
+
+            private function subscribe():void {
+                ds.fill(domainObjects);
+            }
+
+            private function messageHandler(event:MessageEvent):void {
+                var performanceUtils:MessagePerformanceUtils = new MessagePerformanceUtils(event.message);
+                statistics.text = performanceUtils.prettyPrint();
+            }
+        ]]>
+    </mx:Script>
+
+    <mx:DataService id="ds" destination="MyDestination" autoSyncEnabled="true" result="messageHandler(event)" />
+    <mx:ArrayCollection id="domainObjects"/>
+
+    <mx:Button label="Subscribe" click="subscribe()"/>
+
+    <mx:DataGrid dataProvider="{domainObjects}" width="400" height="200">
+        <mx:columns>
+            <mx:DataGridColumn headerText="Key" dataField="id" width="100"/>
+            <mx:DataGridColumn headerText="Name" dataField="name" width="300"/>
+        </mx:columns>
+    </mx:DataGrid>
+
+    <mx:TextArea id="statistics" width="400" height="200"/>
+</mx:Application>

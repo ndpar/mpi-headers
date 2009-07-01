@@ -1,0 +1,18 @@
+<web-app>
+    <servlet>
+        <servlet-name>MessageBrokerServlet</servlet-name>
+        <display-name>MessageBrokerServlet</display-name>
+        <servlet-class>flex.messaging.MessageBrokerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MessageBrokerServlet</servlet-name>
+        <url-pattern>/messagebroker/*</url-pattern>
+    </servlet-mapping>
+
+    <mime-mapping>
+        <extension>swf</extension>
+        <mime-type>application/x-shockwave-flash</mime-type>
+    </mime-mapping>
+</web-app>
