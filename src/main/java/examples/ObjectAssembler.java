@@ -15,6 +15,12 @@ public class ObjectAssembler extends AbstractAssembler {
 
     @Override
     @SuppressWarnings("unchecked")
+    public int refreshFill(List fillParameters, Object item, boolean isCreate, Object prevItem, List changes) {
+        return isCreate ? APPEND_TO_FILL : DO_NOT_EXECUTE_FILL;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public Collection fill(List fillParameters) {
         log.debug("params=" + fillParameters);
         Collection<DomainObject> result = new ArrayList<DomainObject>();
