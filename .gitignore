@@ -1,5 +1,7 @@
-.classpath
-.project
-.settings
-src/main/webapp/main.swf
-target
+/swf/.project
+/swf/target
+
+/war/.classpath
+/war/.project
+/war/target
+
